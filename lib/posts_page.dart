@@ -77,32 +77,91 @@ class PostsPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: ListView.builder(
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: 60,
-                      margin: EdgeInsets.only(top: 15),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black45,
-                            spreadRadius: 0.1,
-                            // offset: Offset(0, 0),
-                            blurRadius: 0.2,
-                          )
+              child: ListView.builder(
+                itemCount: 10,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 80,
+                    margin: EdgeInsets.only(
+                      left: 10,
+                      top: 15,
+                      right: 10,
+                    ),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black45,
+                          spreadRadius: 0.1,
+                          // offset: Offset(0, 0),
+                          blurRadius: 0.2,
+                        )
+                      ],
+                    ),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(100),
+                              image: const DecorationImage(
+                                image: NetworkImage(
+                                    "https://images.generated.photos/PEaj_IOUSRDVR6eNNLeFk1lwDoNodRx2caLBxYkNGIs/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTE0NDE0LmpwZw.jpg"),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Mang Roberto",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    " <8/22/2022>",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "Cabbage 20php/kl nalang po...",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Brgy. Lamcaliaf, Polomolok",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                      child: Text("asdasd"),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
