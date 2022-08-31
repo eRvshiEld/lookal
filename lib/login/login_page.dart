@@ -31,12 +31,14 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) {
-                      return const PostsPage();
-                    }),
-                  );
+                  final userCredential =
+                      await FirebaseAuth.instance.signInAnonymously();
+
+                  if (userCredential.user?.uid != null) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const PostsPage(),
+                    ));
+                  }
                 },
                 child: const Text('Sign In Anonymously'),
               ),
