@@ -72,7 +72,7 @@ class AccountPage extends StatelessWidget {
                       Row(
                         children: [
                           FaIcon(
-                            FontAwesomeIcons.locationDot,
+                            FontAwesomeIcons.mapMarked,
                             size: 16,
                             color: Colors.red[900],
                           ),
