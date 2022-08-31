@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDehu44SPvz9Pfh2L-ZWidGn-R_ZRcs1iQ',
-    appId: '1:847059894383:android:bddf8e93caa3fe46128d9a',
-    messagingSenderId: '847059894383',
-    projectId: 'my-sample-project-6cb36',
-    storageBucket: 'my-sample-project-6cb36.appspot.com',
-    authDomain: 'my-sample-project-6cb36.firebaseapp.com',
+    apiKey: 'AIzaSyAFKQ-TnRo-ajs3ZiZ9TV5-gh858MftLok',
+    appId: '1:986779444389:android:fde8ee80a4d6c12352994c',
+    messagingSenderId: '986779444389',
+    projectId: 'dict-bc-lookal',
+    storageBucket: 'dict-bc-lookal.appspot.com',
+    authDomain: 'dict-bc-lookal.firebaseapp.com',
     measurementId: 'G-3MZM3FN95B',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDehu44SPvz9Pfh2L-ZWidGn-R_ZRcs1iQ',
-    appId: '1:847059894383:android:bddf8e93caa3fe46128d9a',
-    messagingSenderId: '847059894383',
-    projectId: 'my-sample-project-6cb36',
-    storageBucket: 'my-sample-project-6cb36.appspot.com',
+    apiKey: 'AIzaSyAFKQ-TnRo-ajs3ZiZ9TV5-gh858MftLok',
+    appId: '1:986779444389:android:fde8ee80a4d6c12352994c',
+    messagingSenderId: '986779444389',
+    projectId: 'dict-bc-lookal',
+    storageBucket: 'dict-bc-lookal.appspot.com',
   );
 }
