@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "986779444389",
+    "project_id": "dict-bc-lookal",
+    "storage_bucket": "dict-bc-lookal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986779444389:android:fde8ee80a4d6c12352994c",
+        "android_client_info": {
+          "package_name": "com.region12.lookal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986779444389-kjj8q9b3udisvbnf8b4j1afnk3v3snj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFKQ-TnRo-ajs3ZiZ9TV5-gh858MftLok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986779444389-kjj8q9b3udisvbnf8b4j1afnk3v3snj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
