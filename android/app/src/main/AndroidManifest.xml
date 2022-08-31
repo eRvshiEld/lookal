@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lookal">
+    package="com.region12.lookal">
    <application
         android:label="lookal"
         android:name="${applicationName}"

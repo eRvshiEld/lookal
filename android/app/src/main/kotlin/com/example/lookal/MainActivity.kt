@@ -1,4 +1,4 @@
-package com.example.lookal
+package com.region12.lookal
 
 import io.flutter.embedding.android.FlutterActivity
 
