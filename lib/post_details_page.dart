@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lookal/widget/header_widget.dart';
@@ -48,7 +49,7 @@ class PostDetailsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 3,
                   ),
                   Row(
                     children: [
@@ -64,8 +65,68 @@ class PostDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.local_attraction_rounded,
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.locationDot,
+                        size: 15,
+                        color: Colors.red[900],
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "Lamcaliaf, Polomolok South Cotabato",
+                        style: TextStyle(
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 100,
+                    margin: EdgeInsets.symmetric(
+                      vertical: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[100],
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            "https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg"),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "Contact No.",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("09091234567"),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "Description",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Cabbage 20pesos per kilo nalang po pa ubos nalang po meron pa akong 50kl.",
                   ),
                 ],
               ),
