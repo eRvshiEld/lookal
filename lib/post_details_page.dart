@@ -54,7 +54,7 @@ class PostDetailsPage extends StatelessWidget {
                   Row(
                     children: [
                       FaIcon(
-                        FontAwesomeIcons.pesoSign,
+                        FontAwesomeIcons.euroSign,
                         size: 20,
                       ),
                       Text(
@@ -71,7 +71,7 @@ class PostDetailsPage extends StatelessWidget {
                   Row(
                     children: [
                       FaIcon(
-                        FontAwesomeIcons.locationDot,
+                        FontAwesomeIcons.dotCircle,
                         size: 15,
                         color: Colors.red[900],
                       ),

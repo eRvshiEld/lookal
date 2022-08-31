@@ -41,7 +41,7 @@ class NewPostPage extends StatelessWidget {
                           suffixIcon: Padding(
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             child: FaIcon(
-                              FontAwesomeIcons.pesoSign,
+                              FontAwesomeIcons.euroSign,
                               size: 24,
                             ),
                           ),

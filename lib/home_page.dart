@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lookal/login/login_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,12 +17,22 @@ class HomePage extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Text("Sign in"),
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) {
+                              return const LoginPage();
+                            }),
+                          );
+                        },
+                        child: const Text("Sign in"),
+                      ),
                     ],
                   ),
                   SizedBox(
-                    height: (MediaQuery.of(context).size.width - 100) / 2,
+                    height: (MediaQuery.of(context).size.width - 200) / 2,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,

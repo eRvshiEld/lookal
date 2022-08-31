@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lookal/widget/header_widget.dart';
 import 'package:lookal/widget/search_widget.dart';
 
-class PostsPage extends StatelessWidget {
+class PostsPage extends StatefulWidget {
   const PostsPage({Key? key}) : super(key: key);
 
+  @override
+  State<PostsPage> createState() => _PostsPageState();
+}
+
+class _PostsPageState extends State<PostsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
