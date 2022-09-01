@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:lookal/posts_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_image/firebase_image.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -129,19 +128,19 @@ class _LoginPageState extends State<LoginPage> {
                   signIn();
                 },
               ),
-              Container(
-                margin: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: FirebaseImage(
-                          'gs://dict-bc-lookal.appspot.com/app_icon.png'),
-                    ),
-                    color: Colors.white),
-                height: 100,
-                width: 100,
-              ),
+              // Container(
+              //   margin: const EdgeInsets.all(8),
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(12),
+              //       image: DecorationImage(
+              //         fit: BoxFit.cover,
+              //         image: FirebaseImage(
+              //             'gs://dict-bc-lookal.appspot.com/app_icon.png'),
+              //       ),
+              //       color: Colors.white),
+              //   height: 100,
+              //   width: 100,
+              // ),
               // const SizedBox(height: 8),
               // SignInButton(
               //   Buttons.FacebookNew,
