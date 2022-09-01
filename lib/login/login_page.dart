@@ -117,11 +117,11 @@ class _LoginPageState extends State<LoginPage> {
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(const Color(0xFF475934)),
-                    padding: MaterialStateProperty.all(EdgeInsets.all(16)),
+                    padding: MaterialStateProperty.all(EdgeInsets.all(20)),
                     textStyle:
                         MaterialStateProperty.all(TextStyle(fontSize: 14))),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               SignInButton(
                 Buttons.Google,
                 onPressed: () async {

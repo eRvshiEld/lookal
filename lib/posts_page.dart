@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lookal/edit_post_page.dart';
 import 'package:lookal/widget/header_widget.dart';
 import 'package:lookal/widget/menu_button.dart';
 import 'package:lookal/widget/search_widget.dart';
@@ -37,7 +38,7 @@ class _PostsPageState extends State<PostsPage> {
             ),
 
             Row(
-              children: const [
+              children: [
                 Expanded(
                   child: MenuButton(
                     buttonIcon: Icon(
@@ -46,6 +47,20 @@ class _PostsPageState extends State<PostsPage> {
                       color: Colors.white,
                     ),
                     buttonName: "Sell",
+                    onItemPressed: () async {
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //   builder: (_) => EditPostPage(productModel: null, editMode: PostsPage.add, )),
+                      // ));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) {
+                          return const EditPostPage(
+                            productModel: null,
+                            editMode: EditMode.add,
+                          );
+                        }),
+                      );
+                    },
                   ),
                 ),
                 Expanded(
