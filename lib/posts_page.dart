@@ -3,7 +3,14 @@ import 'package:lookal/widget/header_widget.dart';
 import 'package:lookal/widget/search_widget.dart';
 
 class PostsPage extends StatefulWidget {
-  const PostsPage({Key? key}) : super(key: key);
+  final String user_type;
+  final String user_id;
+
+  const PostsPage({
+    Key? key,
+    required this.user_type,
+    required this.user_id,
+  }) : super(key: key);
 
   @override
   State<PostsPage> createState() => _PostsPageState();
