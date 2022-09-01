@@ -50,21 +50,28 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ));
     } else {
-      Widget okButton = TextButton(
+      Widget switchAccountButton = TextButton(
         child: const Text("Switch Account"),
         onPressed: () async {
           await GoogleSignIn().signOut();
           await FirebaseAuth.instance.signOut();
+          Navigator.of(context).pop();
           signIn();
         },
       );
-
+      Widget cancelButton = TextButton(
+        child: Text("Cancel"),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      );
       AlertDialog alert = AlertDialog(
         title: const Text("Ooops!"),
         content:
             const Text("There was a problem with signing in to your account."),
         actions: [
-          okButton,
+          switchAccountButton,
+          cancelButton,
         ],
       );
 
