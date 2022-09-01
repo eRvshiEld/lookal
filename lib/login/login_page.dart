@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -76,12 +77,43 @@ class _LoginPageState extends State<LoginPage> {
                       .signInWithCredential(googleCredential);
 
                   if (googleUserCredential.user?.uid != null) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => PostsPage(
-                        user_type: 'Google',
-                        user_id: googleUserCredential.user!.uid,
-                      ),
-                    ));
+                    final querySnapshot = await FirebaseFirestore.instance
+                        .collection('farmers')
+                        .where('email_address',
+                            isEqualTo: googleUserCredential.user!.email)
+                        .get();
+
+                    if (querySnapshot.docs.isNotEmpty) {
+                      final String farmerId = querySnapshot.docs.first.id;
+
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => PostsPage(
+                          user_type: 'Google',
+                          user_id: googleUserCredential.user!.uid,
+                          farmer_id: farmerId,
+                        ),
+                      ));
+                    } else {
+                      Widget okButton = TextButton(
+                        child: const Text("OK"),
+                        onPressed: () {},
+                      );
+
+                      AlertDialog alert = AlertDialog(
+                        title: const Text("Login"),
+                        content: const Text("Login Denied"),
+                        actions: [
+                          okButton,
+                        ],
+                      );
+
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return alert;
+                        },
+                      );
+                    }
                   }
                 },
               ),
