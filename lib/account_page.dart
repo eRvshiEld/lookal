@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lookal/login/login_page.dart';
 import 'package:lookal/widget/header_widget.dart';
 import 'package:lookal/widget/menu_button.dart';
 
@@ -134,6 +137,13 @@ class AccountPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                   buttonName: "Logout",
+                  onItemPressed: () async {
+                    await GoogleSignIn().signOut();
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => LoginPage(),
+                    ));
+                  },
                 ),
               ),
             ],

@@ -61,7 +61,8 @@ class _LoginPageState extends State<LoginPage> {
       );
       Widget cancelButton = TextButton(
         child: Text("Cancel"),
-        onPressed: () {
+        onPressed: () async {
+          await GoogleSignIn().signOut();
           Navigator.of(context).pop();
         },
       );

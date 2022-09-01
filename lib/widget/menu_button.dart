@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class MenuButton extends StatefulWidget {
   final Icon buttonIcon;
   final String buttonName;
+  final VoidCallback? onItemPressed;
 
   const MenuButton({
     super.key,
     required this.buttonIcon,
     required this.buttonName,
+    this.onItemPressed,
   });
 
   @override
@@ -25,7 +27,7 @@ class _MenuButtonState extends State<MenuButton> {
         color: Colors.green,
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: widget.onItemPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
