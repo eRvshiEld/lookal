@@ -51,117 +51,119 @@ class _EditPostPageState extends State<EditPostPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Cancel'),
-                Text(
-                  widget.editMode == EditMode.add ? 'New Post' : 'Edit Post',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                InkWell(
-                    child: const Text('Publish'),
-                    onTap: () async {
-                      if (_name.text.isNotEmpty &&
-                          _price.text.isNotEmpty &&
-                          _quantity.text.isNotEmpty &&
-                          _unit.text.isNotEmpty &&
-                          _category.text.isNotEmpty) {
-                        await productsCollection.add({
-                          "name": _name.text,
-                          "price": _price.text,
-                          "quantity": _quantity.text,
-                          "unit": _unit.text,
-                          "category": _category.text,
-                          "description": _description.text,
-                        });
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Cancel'),
+                  Text(
+                    widget.editMode == EditMode.add ? 'New Post' : 'Edit Post',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  InkWell(
+                      child: const Text('Publish'),
+                      onTap: () async {
+                        if (_name.text.isNotEmpty &&
+                            _price.text.isNotEmpty &&
+                            _quantity.text.isNotEmpty &&
+                            _unit.text.isNotEmpty &&
+                            _category.text.isNotEmpty) {
+                          await productsCollection.add({
+                            "name": _name.text,
+                            "price": _price.text,
+                            "quantity": _quantity.text,
+                            "unit": _unit.text,
+                            "category": _category.text,
+                            "description": _description.text,
+                          });
 
-                        Navigator.pop(context);
-                      }
-                    }),
-              ],
-            ),
-            const SizedBox(height: 32),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _name,
-                      decoration: const InputDecoration(
-                        hintText: 'Name',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _price,
-                      inputFormatters: <TextInputFormatter>[
-                        CurrencyTextInputFormatter(
-                          locale: 'en-PH',
-                          decimalDigits: 2,
-                          symbol: 'Php ',
+                          Navigator.pop(context);
+                        }
+                      }),
+                ],
+              ),
+              const SizedBox(height: 32),
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _name,
+                        decoration: const InputDecoration(
+                          hintText: 'Name',
+                          border: OutlineInputBorder(),
                         ),
-                      ],
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        hintText: 'Price',
-                        border: OutlineInputBorder(),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _quantity,
-                      inputFormatters: <TextInputFormatter>[
-                        CurrencyTextInputFormatter(
-                          locale: 'en-PH',
-                          decimalDigits: 2,
-                          symbol: '',
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _price,
+                        inputFormatters: <TextInputFormatter>[
+                          CurrencyTextInputFormatter(
+                            locale: 'en-PH',
+                            decimalDigits: 2,
+                            symbol: 'Php ',
+                          ),
+                        ],
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          hintText: 'Price',
+                          border: OutlineInputBorder(),
                         ),
-                      ],
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        hintText: 'Quantity',
-                        border: OutlineInputBorder(),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _unit,
-                      decoration: const InputDecoration(
-                        hintText: 'Unit',
-                        border: OutlineInputBorder(),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _quantity,
+                        inputFormatters: <TextInputFormatter>[
+                          CurrencyTextInputFormatter(
+                            locale: 'en-PH',
+                            decimalDigits: 2,
+                            symbol: '',
+                          ),
+                        ],
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          hintText: 'Quantity',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _category,
-                      decoration: const InputDecoration(
-                        hintText: 'Category',
-                        border: OutlineInputBorder(),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _unit,
+                        decoration: const InputDecoration(
+                          hintText: 'Unit',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _description,
-                      decoration: const InputDecoration(
-                        hintText: 'Description',
-                        helperText:
-                            'A detailed description might help you sell faster.',
-                        border: OutlineInputBorder(),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _category,
+                        decoration: const InputDecoration(
+                          hintText: 'Category',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
-                      maxLines: null,
-                    ),
-                  ],
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _description,
+                        decoration: const InputDecoration(
+                          hintText: 'Description',
+                          helperText:
+                              'A detailed description might help you sell faster.',
+                          border: OutlineInputBorder(),
+                        ),
+                        maxLines: null,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
