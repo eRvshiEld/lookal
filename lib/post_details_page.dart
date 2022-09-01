@@ -53,12 +53,12 @@ class PostDetailsPage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      FaIcon(
-                        FontAwesomeIcons.euroSign,
-                        size: 20,
-                      ),
+                      // FaIcon(
+                      //   FontAwesomeIcons.euroSign,
+                      //   size: 20,
+                      // ),
                       Text(
-                        "20",
+                        "Php20",
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -71,7 +71,7 @@ class PostDetailsPage extends StatelessWidget {
                   Row(
                     children: [
                       FaIcon(
-                        FontAwesomeIcons.dotCircle,
+                        FontAwesomeIcons.mapMarkedAlt,
                         size: 15,
                         color: Colors.red[900],
                       ),

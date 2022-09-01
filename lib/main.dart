@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lookal/account_page.dart';
+import 'package:lookal/farmers_page.dart';
 import 'package:lookal/home_page.dart';
+import 'package:lookal/post_details_page.dart';
+import 'package:lookal/posts_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const PostsPage(),
     );
   }
 }
