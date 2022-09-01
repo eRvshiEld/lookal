@@ -33,13 +33,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PostDetailsPage(),
-      // home: currentUser != null
-      //     ? PostsPage(
-      //         user_id: currentUser.uid,
-      //         user_type: provider,
-      //       )
-      //     : LoginPage(),
+      home: currentUser != null
+          ? PostsPage(
+              user_id: currentUser.uid,
+              user_type: provider,
+            )
+          : LoginPage(),
       // home: FutureBuilder(
       // future: FirebaseFirestore.instance.collection("farmers"),
       // builder: builder),
