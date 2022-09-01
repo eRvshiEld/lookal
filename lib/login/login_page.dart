@@ -60,23 +60,29 @@ class _LoginPageState extends State<LoginPage> {
                   final GoogleSignInAccount? googleUser =
                       await GoogleSignIn().signIn();
 
-                  // Obtain the auth details from the request.
-                  final GoogleSignInAuthentication? googleAuth =
-                      await googleUser?.authentication;
+                  final tempSnapshot = await FirebaseFirestore.instance
+                      .collection('farmers')
+                      .where('email_address', isEqualTo: googleUser?.email)
+                      .get();
 
-                  // Create a new credential.
-                  final OAuthCredential googleCredential =
-                      GoogleAuthProvider.credential(
-                    accessToken: googleAuth!.accessToken,
-                    idToken: googleAuth.idToken,
-                  );
+                  if (tempSnapshot.docs.isNotEmpty) {
+                    // Obtain the auth details from the request.
+                    final GoogleSignInAuthentication? googleAuth =
+                        await googleUser?.authentication;
 
-                  // Sign in to Firebase with the Google [UserCredential].
-                  final UserCredential googleUserCredential = await FirebaseAuth
-                      .instance
-                      .signInWithCredential(googleCredential);
+                    // Create a new credential.
+                    final OAuthCredential googleCredential =
+                        GoogleAuthProvider.credential(
+                      accessToken: googleAuth!.accessToken,
+                      idToken: googleAuth.idToken,
+                    );
 
-                  if (googleUserCredential.user?.uid != null) {
+                    // Sign in to Firebase with the Google [UserCredential].
+                    final UserCredential googleUserCredential =
+                        await FirebaseAuth.instance
+                            .signInWithCredential(googleCredential);
+
+                    // if (googleUserCredential.user?.uid != null) {
                     final querySnapshot = await FirebaseFirestore.instance
                         .collection('farmers')
                         .where('email_address',
@@ -93,30 +99,56 @@ class _LoginPageState extends State<LoginPage> {
                           farmer_id: farmerId,
                         ),
                       ));
-                    } else {
-                      Widget okButton = TextButton(
-                        child: const Text("Sign in again"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      );
+                      // } else {
+                      //   Widget okButton = TextButton(
+                      //     child: const Text("Sign in again"),
+                      //     onPressed: () {
+                      //       Navigator.of(context).pop();
+                      //     },
+                      //   );
 
-                      AlertDialog alert = AlertDialog(
-                        title: const Text("Ooops!"),
-                        content: const Text(
-                            "There was a problem with signing in to your account."),
-                        actions: [
-                          okButton,
-                        ],
-                      );
+                      //   AlertDialog alert = AlertDialog(
+                      //     title: const Text("Ooops!"),
+                      //     content: const Text(
+                      //         "There was a problem with signing in to your account."),
+                      //     actions: [
+                      //       okButton,
+                      //     ],
+                      //   );
 
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return alert;
-                        },
-                      );
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return alert;
+                      //     },
+                      //   );
+                      // }
                     }
+                  } else {
+                    Widget okButton = TextButton(
+                      child: const Text("Switch Account"),
+                      onPressed: () async {
+                        await GoogleSignIn().signOut();
+                        await FirebaseAuth.instance.signOut();
+                        Navigator.of(context).pop();
+                      },
+                    );
+
+                    AlertDialog alert = AlertDialog(
+                      title: const Text("Ooops!"),
+                      content: const Text(
+                          "There was a problem with signing in to your account."),
+                      actions: [
+                        okButton,
+                      ],
+                    );
+
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
                   }
                 },
               ),
