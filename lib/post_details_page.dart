@@ -16,9 +16,18 @@ class PostDetailsPage extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.all(20),
-              child: Icon(
-                Icons.arrow_back_rounded,
-                size: 24,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.arrow_back_rounded,
+                    size: 24,
+                  ),
+                  Icon(
+                    Icons.edit,
+                    color: Colors.blue,
+                  ),
+                ],
               ),
             ),
             Container(
