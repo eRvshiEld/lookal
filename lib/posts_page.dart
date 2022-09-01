@@ -6,11 +6,13 @@ import 'package:lookal/widget/search_widget.dart';
 class PostsPage extends StatefulWidget {
   final String user_type;
   final String user_id;
+  final String? farmer_id;
 
   const PostsPage({
     Key? key,
     required this.user_type,
     required this.user_id,
+    this.farmer_id,
   }) : super(key: key);
 
   @override
