@@ -55,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () async {
           await GoogleSignIn().signOut();
           await FirebaseAuth.instance.signOut();
+          Navigator.pop(context);
           signIn();
         },
       );
