@@ -59,9 +59,10 @@ class _PostsPageState extends State<PostsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) {
-                          return const EditPostPage(
+                          return EditPostPage(
                             productModel: null,
                             editMode: EditMode.add,
+                            farmerId: widget.farmer_id,
                           );
                         }),
                       );

@@ -12,11 +12,13 @@ enum EditMode {
 class EditPostPage extends StatefulWidget {
   final ProductModel? productModel;
   final EditMode editMode;
+  final String? farmerId;
 
   const EditPostPage({
     super.key,
     this.productModel,
     required this.editMode,
+    this.farmerId,
   });
 
   @override
@@ -79,6 +81,8 @@ class _EditPostPageState extends State<EditPostPage> {
                             "unit": _unit.text,
                             "category": _category.text,
                             "description": _description.text,
+                            "farmer_id": widget.farmerId,
+                            "image_url": null,
                           });
 
                           Navigator.pop(context);
