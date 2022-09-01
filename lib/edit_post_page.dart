@@ -61,7 +61,41 @@ class _EditPostPageState extends State<EditPostPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Cancel'),
+                  InkWell(
+                    child: const Text('Cancel'),
+                    onTap: () {
+                      Widget discardButton = TextButton(
+                        child: const Text("Discard"),
+                        onPressed: () async {
+                          var nav = Navigator.of(context);
+                          nav.pop();
+                          nav.pop();
+                        },
+                      );
+                      Widget cancelButton = TextButton(
+                        child: Text("Cancel"),
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                        },
+                      );
+                      AlertDialog alert = AlertDialog(
+                        title: const Text("Discard Posting?"),
+                        content:
+                            const Text("You're about to discard this posting."),
+                        actions: [
+                          discardButton,
+                          cancelButton,
+                        ],
+                      );
+
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return alert;
+                        },
+                      );
+                    },
+                  ),
                   Text(
                     widget.editMode == EditMode.add ? 'New Post' : 'Edit Post',
                     style: const TextStyle(fontWeight: FontWeight.bold),

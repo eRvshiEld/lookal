@@ -33,13 +33,30 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.arrow_back_rounded,
-                    size: 24,
+                  InkWell(
+                    child: Icon(
+                      Icons.arrow_back_rounded,
+                      size: 24,
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  Icon(
-                    Icons.edit,
-                    color: Colors.blue,
+                  InkWell(
+                    child: Icon(
+                      Icons.edit,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) {
+                          return EditPostPage(
+                            productModel: widget.productModel,
+                            editMode: EditMode.edit,
+                          );
+                        }),
+                      );
+                    },
                   ),
                 ],
               ),
