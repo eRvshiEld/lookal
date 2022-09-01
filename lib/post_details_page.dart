@@ -1,11 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lookal/edit_post_page.dart';
+import 'package:lookal/models/product_model.dart';
 import 'package:lookal/widget/header_widget.dart';
 
-class PostDetailsPage extends StatelessWidget {
-  const PostDetailsPage({Key? key}) : super(key: key);
+class PostDetailsPage extends StatefulWidget {
+  final ProductModel? productModel;
+  final String productId;
 
+  const PostDetailsPage({
+    super.key,
+    this.productModel,
+    required this.productId,
+  });
+
+  @override
+  State<PostDetailsPage> createState() => _PostDetailsPageState();
+}
+
+class _PostDetailsPageState extends State<PostDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +51,9 @@ class PostDetailsPage extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoM1mYfFL8CRDMNxUUKppwR95Im6NW2c3lg0qRHKvwrdV43nDC4hPpX3pSfaQJE1jV1uU&usqp=CAU",
+                    // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoM1mYfFL8CRDMNxUUKppwR95Im6NW2c3lg0qRHKvwrdV43nDC4hPpX3pSfaQJE1jV1uU&usqp=CAU",
+                    widget.productModel!.imageUrl ??
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoM1mYfFL8CRDMNxUUKppwR95Im6NW2c3lg0qRHKvwrdV43nDC4hPpX3pSfaQJE1jV1uU&usqp=CAU",
                   ),
                 ),
               ),
@@ -51,7 +67,7 @@ class PostDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Cabbage",
+                    widget.productModel!.name,
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -67,7 +83,7 @@ class PostDetailsPage extends StatelessWidget {
                       //   size: 20,
                       // ),
                       Text(
-                        "Php20",
+                        widget.productModel!.price,
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -135,7 +151,7 @@ class PostDetailsPage extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Cabbage 20pesos per kilo nalang po pa ubos nalang po meron pa akong 50kl.",
+                    widget.productModel!.description ?? "",
                   ),
                 ],
               ),

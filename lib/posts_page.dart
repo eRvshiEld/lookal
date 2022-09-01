@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lookal/edit_post_page.dart';
+import 'package:lookal/models/product_model.dart';
+import 'package:lookal/post_details_page.dart';
 import 'package:lookal/widget/header_widget.dart';
 import 'package:lookal/widget/menu_button.dart';
 import 'package:lookal/widget/search_widget.dart';
@@ -44,31 +46,32 @@ class _PostsPageState extends State<PostsPage> {
 
             Row(
               children: [
-                Expanded(
-                  child: MenuButton(
-                    buttonIcon: Icon(
-                      Icons.edit,
-                      size: 14,
-                      color: Colors.white,
+                if (widget.user_type == "Google")
+                  Expanded(
+                    child: MenuButton(
+                      buttonIcon: Icon(
+                        Icons.edit,
+                        size: 14,
+                        color: Colors.white,
+                      ),
+                      buttonName: "Sell",
+                      onItemPressed: () async {
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //   builder: (_) => EditPostPage(productModel: null, editMode: PostsPage.add, )),
+                        // ));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) {
+                            return EditPostPage(
+                              productModel: null,
+                              editMode: EditMode.add,
+                              farmerId: widget.farmer_id,
+                            );
+                          }),
+                        );
+                      },
                     ),
-                    buttonName: "Sell",
-                    onItemPressed: () async {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //   builder: (_) => EditPostPage(productModel: null, editMode: PostsPage.add, )),
-                      // ));
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) {
-                          return EditPostPage(
-                            productModel: null,
-                            editMode: EditMode.add,
-                            farmerId: widget.farmer_id,
-                          );
-                        }),
-                      );
-                    },
                   ),
-                ),
                 Expanded(
                   child: MenuButton(
                     buttonIcon: Icon(
@@ -111,7 +114,25 @@ class _PostsPageState extends State<PostsPage> {
                             ],
                           ),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) {
+                                  return PostDetailsPage(
+                                    productModel: ProductModel(
+                                      name: data["name"],
+                                      price: data["price"],
+                                      quantity: data["quantity"],
+                                      unit: data["unit"],
+                                      category: data["category"],
+                                      description: data["description"],
+                                      imageUrl: data["image_url"],
+                                    ),
+                                    productId: snapshot.data!.docs[index].id,
+                                  );
+                                }),
+                              );
+                            },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,7 +232,7 @@ class _PostsPageState extends State<PostsPage> {
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
-                                          data['image_url'],
+                                          data['image_url'] ?? "",
                                         ),
                                       ),
                                     ),

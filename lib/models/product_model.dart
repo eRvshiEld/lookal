@@ -9,6 +9,7 @@ class ProductModel {
   final String unit;
   final String category;
   final String? description;
+  final String? imageUrl;
 
   ProductModel({
     required this.name,
@@ -17,6 +18,7 @@ class ProductModel {
     required this.unit,
     required this.category,
     this.description,
+    this.imageUrl,
   });
 
   Map<String, dynamic> toMap() {

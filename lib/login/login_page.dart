@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
           await FirebaseAuth.instance.signInWithCredential(googleCredential);
 
       final String farmerId = querySnapshot.docs.first.id;
+      // final String farmerId = "asdasdasdsa";
 
       Navigator.of(context).push(MaterialPageRoute(
         builder: (_) => PostsPage(
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (userCredential.user?.uid != null) {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => PostsPage(
-                        user_type: 'Anonymously',
+                        user_type: '',
                         user_id: userCredential.user!.uid,
                       ),
                     ));
