@@ -95,13 +95,16 @@ class _LoginPageState extends State<LoginPage> {
                       ));
                     } else {
                       Widget okButton = TextButton(
-                        child: const Text("OK"),
-                        onPressed: () {},
+                        child: const Text("Sign in again"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                       );
 
                       AlertDialog alert = AlertDialog(
-                        title: const Text("Login"),
-                        content: const Text("Login Denied"),
+                        title: const Text("Ooops!"),
+                        content: const Text(
+                            "There was a problem with signing in to your account."),
                         actions: [
                           okButton,
                         ],
