@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lookal/widget/header_widget.dart';
+import 'package:lookal/widget/menu_button.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -118,6 +119,21 @@ class AccountPage extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                  bottom: 20,
+                ),
+                child: MenuButton(
+                  buttonIcon: Icon(
+                    Icons.logout,
+                    size: 14,
+                    color: Colors.white,
+                  ),
+                  buttonName: "Logout",
                 ),
               ),
             ],

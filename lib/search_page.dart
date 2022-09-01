@@ -1,62 +1,35 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lookal/widget/header_widget.dart';
-import 'package:lookal/widget/menu_button.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:lookal/widget/search_widget.dart';
 
-class PostsPage extends StatefulWidget {
-  final String user_type;
-  final String user_id;
-
-  const PostsPage({
-    Key? key,
-    required this.user_type,
-    required this.user_id,
-  }) : super(key: key);
+class SearchPage extends StatefulWidget {
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
-  State<PostsPage> createState() => _PostsPageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _PostsPageState extends State<PostsPage> {
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Column(
           children: [
-            /// Header Widget
-            const HeaderWidget(),
-
-            /// Divider
-            const Divider(
-              height: 1,
-              color: Colors.grey,
-            ),
-
-            Row(
-              children: const [
-                Expanded(
-                  child: MenuButton(
-                    buttonIcon: Icon(
-                      Icons.edit,
-                      size: 14,
-                      color: Colors.white,
-                    ),
-                    buttonName: "Sell",
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back,
                   ),
-                ),
-                Expanded(
-                  child: MenuButton(
-                    buttonIcon: Icon(
-                      Icons.menu,
-                      size: 14,
-                      color: Colors.white,
-                    ),
-                    buttonName: "Categories",
-                  ),
-                ),
-              ],
+                  SearchWidget(),
+                ],
+              ),
             ),
 
             /// ListView
