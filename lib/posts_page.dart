@@ -29,12 +29,44 @@ class _PostsPageState extends State<PostsPage> {
 
             /// Divider
             const Divider(
-              height: 5,
+              height: 10,
               color: Colors.black54,
             ),
 
-            /// Search Widget
-            const SearchWidget(),
+            // /// Search Widget
+            // const SearchWidget(),
+            Row(
+              children: [
+                Container(
+                  width: (MediaQuery.of(context).size.width - 20) / 2,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(Icons.edit),
+                        Text(
+                          "Sell",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  width: (MediaQuery.of(context).size.width - 20) / 2,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.green,
+                  ),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Text("Categories"),
+                  ),
+                ),
+              ],
+            ),
 
             /// ListView
             Expanded(

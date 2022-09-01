@@ -10,6 +10,7 @@ class HeaderWidget extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
       color: Colors.white,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             padding: EdgeInsets.all(5),
@@ -27,13 +28,26 @@ class HeaderWidget extends StatelessWidget {
               Icons.newspaper,
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 6, 20, 9),
-            child: FaIcon(
-              color: Color(0xFF616464),
-              size: 19,
-              FontAwesomeIcons.tractor,
-            ),
+          Row(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(right: 20),
+                    child: FaIcon(
+                      color: Color(0xFF616464),
+                      size: 19,
+                      FontAwesomeIcons.userAlt,
+                    ),
+                  ),
+                ],
+              ),
+              FaIcon(
+                color: Color(0xFF616464),
+                size: 19,
+                FontAwesomeIcons.search,
+              ),
+            ],
           ),
         ],
       ),

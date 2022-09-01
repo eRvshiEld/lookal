@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lookal/login/login_page.dart';
+import 'package:lookal/posts_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -24,7 +25,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: PostsPage(
+        user_type: "",
+        user_id: "",
+      ),
     );
   }
 }
