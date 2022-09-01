@@ -25,36 +25,47 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: 150,
+                height: 300,
                 child: Image.asset("assets/img/logo.png"),
               ),
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) {
-                      return const PostsPage();
-                    }),
-                  );
+                  final userCredential =
+                      await FirebaseAuth.instance.signInAnonymously();
+
+                  if (userCredential.user?.uid != null) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => PostsPage(
+                        user_type: 'Anonymously',
+                        user_id: userCredential.user!.uid,
+                      ),
+                    ));
+                  }
                 },
-                child: const Text('Sign In Anonymously'),
+                child: Text('Sign In Anonymously'),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(const Color(0xFF475934)),
+                    padding: MaterialStateProperty.all(EdgeInsets.all(16)),
+                    textStyle:
+                        MaterialStateProperty.all(TextStyle(fontSize: 14))),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
               SignInButton(
                 Buttons.Google,
                 onPressed: () async {},
               ),
-              const SizedBox(height: 8),
-              SignInButton(
-                Buttons.FacebookNew,
-                onPressed: () {},
-              ),
-              const SizedBox(height: 8),
-              SignInButton(
-                Buttons.Twitter,
-                onPressed: () {},
-              )
+              // const SizedBox(height: 8),
+              // SignInButton(
+              //   Buttons.FacebookNew,
+              //   onPressed: () {},
+              // ),
+              // const SizedBox(height: 8),
+              // SignInButton(
+              //   Buttons.Twitter,
+              //   onPressed: () {},
+              // )
             ],
           ),
         ),
