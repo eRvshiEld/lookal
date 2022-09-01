@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:lookal/posts_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -54,7 +55,35 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 16),
               SignInButton(
                 Buttons.Google,
-                onPressed: () async {},
+                onPressed: () async {
+                  final GoogleSignInAccount? googleUser =
+                      await GoogleSignIn().signIn();
+
+                  // Obtain the auth details from the request.
+                  final GoogleSignInAuthentication? googleAuth =
+                      await googleUser?.authentication;
+
+                  // Create a new credential.
+                  final OAuthCredential googleCredential =
+                      GoogleAuthProvider.credential(
+                    accessToken: googleAuth!.accessToken,
+                    idToken: googleAuth.idToken,
+                  );
+
+                  // Sign in to Firebase with the Google [UserCredential].
+                  final UserCredential googleUserCredential = await FirebaseAuth
+                      .instance
+                      .signInWithCredential(googleCredential);
+
+                  if (googleUserCredential.user?.uid != null) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => PostsPage(
+                        user_type: 'Google',
+                        user_id: googleUserCredential.user!.uid,
+                      ),
+                    ));
+                  }
+                },
               ),
               // const SizedBox(height: 8),
               // SignInButton(
