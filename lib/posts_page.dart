@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lookal/edit_post_page.dart';
 import 'package:lookal/widget/header_widget.dart';
@@ -184,16 +185,6 @@ class _PostsPageState extends State<PostsPage> {
                                 Text(
                                   "Cabbage 20pesos per kilo nalang po pa ubos nalang po meron pa akong 50kl.",
                                 ),
-                                // SizedBox(
-                                //   height: 5,
-                                // ),
-                                // Text(
-                                //   "Php 20/kilo",
-                                //   style: TextStyle(
-                                //     color: Colors.blue,
-                                //     fontSize: 16,
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),

@@ -54,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
         child: const Text("Switch Account"),
         onPressed: () async {
           await GoogleSignIn().signOut();
-          await FirebaseAuth.instance.signOut();
           Navigator.of(context).pop();
           signIn();
         },
