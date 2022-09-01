@@ -17,6 +17,66 @@ class _LoginPageState extends State<LoginPage> {
     super.didChangeDependencies();
   }
 
+  void signIn() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('farmers')
+        .where('email_address', isEqualTo: googleUser?.email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      // Obtain the auth details from the request.
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Create a new credential.
+      final OAuthCredential googleCredential = GoogleAuthProvider.credential(
+        accessToken: googleAuth!.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in to Firebase with the Google [UserCredential].
+      final UserCredential googleUserCredential =
+          await FirebaseAuth.instance.signInWithCredential(googleCredential);
+
+      final String farmerId = querySnapshot.docs.first.id;
+
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => PostsPage(
+          user_type: 'Google',
+          user_id: googleUserCredential.user!.uid,
+          farmer_id: farmerId,
+        ),
+      ));
+    } else {
+      Widget okButton = TextButton(
+        child: const Text("Switch Account"),
+        onPressed: () async {
+          await GoogleSignIn().signOut();
+          await FirebaseAuth.instance.signOut();
+          signIn();
+        },
+      );
+
+      AlertDialog alert = AlertDialog(
+        title: const Text("Ooops!"),
+        content:
+            const Text("There was a problem with signing in to your account."),
+        actions: [
+          okButton,
+        ],
+      );
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,99 +117,7 @@ class _LoginPageState extends State<LoginPage> {
               SignInButton(
                 Buttons.Google,
                 onPressed: () async {
-                  final GoogleSignInAccount? googleUser =
-                      await GoogleSignIn().signIn();
-
-                  final tempSnapshot = await FirebaseFirestore.instance
-                      .collection('farmers')
-                      .where('email_address', isEqualTo: googleUser?.email)
-                      .get();
-
-                  if (tempSnapshot.docs.isNotEmpty) {
-                    // Obtain the auth details from the request.
-                    final GoogleSignInAuthentication? googleAuth =
-                        await googleUser?.authentication;
-
-                    // Create a new credential.
-                    final OAuthCredential googleCredential =
-                        GoogleAuthProvider.credential(
-                      accessToken: googleAuth!.accessToken,
-                      idToken: googleAuth.idToken,
-                    );
-
-                    // Sign in to Firebase with the Google [UserCredential].
-                    final UserCredential googleUserCredential =
-                        await FirebaseAuth.instance
-                            .signInWithCredential(googleCredential);
-
-                    // if (googleUserCredential.user?.uid != null) {
-                    final querySnapshot = await FirebaseFirestore.instance
-                        .collection('farmers')
-                        .where('email_address',
-                            isEqualTo: googleUserCredential.user!.email)
-                        .get();
-
-                    if (querySnapshot.docs.isNotEmpty) {
-                      final String farmerId = querySnapshot.docs.first.id;
-
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => PostsPage(
-                          user_type: 'Google',
-                          user_id: googleUserCredential.user!.uid,
-                          farmer_id: farmerId,
-                        ),
-                      ));
-                      // } else {
-                      //   Widget okButton = TextButton(
-                      //     child: const Text("Sign in again"),
-                      //     onPressed: () {
-                      //       Navigator.of(context).pop();
-                      //     },
-                      //   );
-
-                      //   AlertDialog alert = AlertDialog(
-                      //     title: const Text("Ooops!"),
-                      //     content: const Text(
-                      //         "There was a problem with signing in to your account."),
-                      //     actions: [
-                      //       okButton,
-                      //     ],
-                      //   );
-
-                      //   showDialog(
-                      //     context: context,
-                      //     builder: (BuildContext context) {
-                      //       return alert;
-                      //     },
-                      //   );
-                      // }
-                    }
-                  } else {
-                    Widget okButton = TextButton(
-                      child: const Text("Switch Account"),
-                      onPressed: () async {
-                        await GoogleSignIn().signOut();
-                        await FirebaseAuth.instance.signOut();
-                        Navigator.of(context).pop();
-                      },
-                    );
-
-                    AlertDialog alert = AlertDialog(
-                      title: const Text("Ooops!"),
-                      content: const Text(
-                          "There was a problem with signing in to your account."),
-                      actions: [
-                        okButton,
-                      ],
-                    );
-
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return alert;
-                      },
-                    );
-                  }
+                  signIn();
                 },
               ),
               // const SizedBox(height: 8),
