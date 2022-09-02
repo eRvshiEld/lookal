@@ -97,6 +97,8 @@ class _PostsPageState extends State<PostsPage> {
                         final data = snapshot.data!.docs[index].data()
                             as Map<String, dynamic>;
 
+                        var farmerName = "Richard";
+
                         return FutureBuilder<
                                 DocumentSnapshot<Map<String, dynamic>>>(
                             future: FirebaseFirestore.instance
@@ -105,8 +107,8 @@ class _PostsPageState extends State<PostsPage> {
                                 .get(),
                             builder: (context, farmer) {
                               if (farmer.hasData) {
-                                print('JDG ${farmer.data!.data()!['name']}');
-                                final farmerName = farmer.data!.data()!['name'];
+                                // print('JDG ${farmer.data!.data()!['name']}');
+                                farmerName = farmer.data!.data()!['name'];
                               }
 
                               return Container(
@@ -192,8 +194,7 @@ class _PostsPageState extends State<PostsPage> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          farmer.data!
-                                                              .data()!['name'],
+                                                          farmerName,
                                                           style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w600,
