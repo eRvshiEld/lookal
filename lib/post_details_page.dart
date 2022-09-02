@@ -9,11 +9,13 @@ import 'package:lookal/widget/header_widget.dart';
 class PostDetailsPage extends StatefulWidget {
   final ProductModel? productModel;
   final String productId;
+  final VoidCallback? onItemDeleted;
 
   const PostDetailsPage({
     super.key,
     this.productModel,
     required this.productId,
+    this.onItemDeleted,
   });
 
   @override
@@ -122,7 +124,14 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                   });
                                 },
                               ),
-                              Icon(Icons.delete),
+                              SizedBox(width: 16),
+                              InkWell(
+                                child: Icon(Icons.delete),
+                                onTap: () {
+                                  widget.onItemDeleted!();
+                                  Navigator.pop(context);
+                                },
+                              ),
                             ],
                           ),
                         ],
