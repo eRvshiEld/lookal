@@ -132,7 +132,17 @@ class _EditPostPageState extends State<EditPostPage> {
                             });
                           }
 
-                          Navigator.pop(context);
+                          Navigator.pop(
+                            context,
+                            ProductModel(
+                              name: _name.text,
+                              unit: _unit.text,
+                              quantity: _quantity.text,
+                              category: _category.text,
+                              description: _description.text,
+                              price: _price.text,
+                            ),
+                          );
                         }
                       }),
                 ],

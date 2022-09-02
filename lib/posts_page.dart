@@ -97,151 +97,186 @@ class _PostsPageState extends State<PostsPage> {
                         final data = snapshot.data!.docs[index].data()
                             as Map<String, dynamic>;
 
-                        return Container(
-                          height: 300,
-                          margin: const EdgeInsets.only(
-                            top: 10,
-                          ),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black45,
-                                spreadRadius: 0.3,
-                                // offset: Offset(0, 0),
-                                blurRadius: 0.3,
-                              )
-                            ],
-                          ),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (_) {
-                                  return PostDetailsPage(
-                                    productModel: ProductModel(
-                                      name: data["name"],
-                                      price: data["price"],
-                                      quantity: data["quantity"],
-                                      unit: data["unit"],
-                                      category: data["category"],
-                                      description: data["description"],
-                                      imageUrl: data["image_url"],
-                                    ),
-                                    productId: snapshot.data!.docs[index].id,
-                                  );
-                                }),
-                              );
-                            },
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(15),
+                        return FutureBuilder<
+                                DocumentSnapshot<Map<String, dynamic>>>(
+                            future: FirebaseFirestore.instance
+                                .collection('farmers')
+                                .doc(data['farmer_id'])
+                                .get(),
+                            builder: (context, farmer) {
+                              if (farmer.hasData) {
+                                print('JDG ${farmer.data!.data()!['name']}');
+                                final farmerName = farmer.data!.data()!['name'];
+                              }
+
+                              return Container(
+                                height: 300,
+                                margin: const EdgeInsets.only(
+                                  top: 10,
+                                ),
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black45,
+                                      spreadRadius: 0.3,
+                                      // offset: Offset(0, 0),
+                                      blurRadius: 0.3,
+                                    )
+                                  ],
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (_) {
+                                        return PostDetailsPage(
+                                          productModel: ProductModel(
+                                            name: data["name"],
+                                            price: data["price"],
+                                            quantity: data["quantity"],
+                                            unit: data["unit"],
+                                            category: data["category"],
+                                            description: data["description"],
+                                            imageUrl: data["image_url"],
+                                          ),
+                                          productId:
+                                              snapshot.data!.docs[index].id,
+                                        );
+                                      }),
+                                    );
+                                  },
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey[200],
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          100),
-                                                  image: const DecorationImage(
-                                                    image: NetworkImage(
-                                                        "https://images.generated.photos/PEaj_IOUSRDVR6eNNLeFk1lwDoNodRx2caLBxYkNGIs/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTE0NDE0LmpwZw.jpg"),
-                                                  ),
+                                      Container(
+                                        padding: EdgeInsets.all(15),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.grey[200],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        image:
+                                                            const DecorationImage(
+                                                          image: NetworkImage(
+                                                              "https://images.generated.photos/PEaj_IOUSRDVR6eNNLeFk1lwDoNodRx2caLBxYkNGIs/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTE0NDE0LmpwZw.jpg"),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          farmer.data!
+                                                              .data()!['name'],
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "17 minutes ago",
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .grey[500],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    data['name'],
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 5,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.green,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                  ),
+                                                  child: Text(
+                                                    "${data['price']}/${data['unit']}",
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      color: Colors.white,
                                                       fontSize: 16,
                                                     ),
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  data['name'],
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
                                                   ),
-                                                  Text(
-                                                    "17 minutes ago",
-                                                    style: TextStyle(
-                                                      color: Colors.grey[500],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 10,
-                                              vertical: 5,
+                                                ),
+                                                Text(
+                                                  data["description"],
+                                                ),
+                                              ],
                                             ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.green,
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                            ),
-                                            child: Text(
-                                              "${data['price']}/${data['unit']}",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[300],
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                data['image_url'] ?? "",
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        data["description"],
-                                      ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                          data['image_url'] ?? "",
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
+                              );
+                            });
                       },
                     ),
                   );
