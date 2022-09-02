@@ -74,48 +74,53 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                               Navigator.of(context).pop();
                             },
                           ),
-                          InkWell(
-                            child: Icon(
-                              Icons.edit,
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (_) {
-                                  return EditPostPage(
-                                    id: widget.productId,
-                                    productModel: updatedName != null &&
-                                            updateUnit != null &&
-                                            updatedQuantity != null &&
-                                            updatedCategory != null &&
-                                            updatedDescription != null &&
-                                            updatedPrice != null
-                                        ? ProductModel(
-                                            name: updatedName!,
-                                            unit: updateUnit!,
-                                            quantity: updatedQuantity!,
-                                            category: updatedCategory!,
-                                            description: updatedDescription,
-                                            price: updatedPrice!,
-                                          )
-                                        : widget.productModel,
-                                    editMode: EditMode.edit,
-                                  );
-                                }),
-                              ).then((value) {
-                                if (value is ProductModel) {
-                                  /// `setState` notifies the Flutter
-                                  /// to rebuild the UI
-                                  setState(() {
-                                    /// Updates local value of the item models
-                                    /// to display it on the current page.
-                                    updatedName = value.name;
-                                    updatedDescription = value.description;
-                                    updatedPrice = value.price;
+                          Row(
+                            children: [
+                              InkWell(
+                                child: Icon(
+                                  Icons.edit,
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) {
+                                      return EditPostPage(
+                                        id: widget.productId,
+                                        productModel: updatedName != null &&
+                                                updateUnit != null &&
+                                                updatedQuantity != null &&
+                                                updatedCategory != null &&
+                                                updatedDescription != null &&
+                                                updatedPrice != null
+                                            ? ProductModel(
+                                                name: updatedName!,
+                                                unit: updateUnit!,
+                                                quantity: updatedQuantity!,
+                                                category: updatedCategory!,
+                                                description: updatedDescription,
+                                                price: updatedPrice!,
+                                              )
+                                            : widget.productModel,
+                                        editMode: EditMode.edit,
+                                      );
+                                    }),
+                                  ).then((value) {
+                                    if (value is ProductModel) {
+                                      /// `setState` notifies the Flutter
+                                      /// to rebuild the UI
+                                      setState(() {
+                                        /// Updates local value of the item models
+                                        /// to display it on the current page.
+                                        updatedName = value.name;
+                                        updatedDescription = value.description;
+                                        updatedPrice = value.price;
+                                      });
+                                    }
                                   });
-                                }
-                              });
-                            },
+                                },
+                              ),
+                              Icon(Icons.delete),
+                            ],
                           ),
                         ],
                       ),
