@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +99,14 @@ class _PostsPageState extends State<PostsPage> {
                             as Map<String, dynamic>;
 
                         var farmerName = "Richard";
+                        var imagePath =
+                            "https://images.generated.photos/zQ0hBGUJIrKhFLAupgQS2DCvznVa81enAlKA0xN_aEI/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODUwMDk3LmpwZw.jpg";
+
+                        Random rnd;
+                        int min = 5;
+                        int max = 10;
+                        rnd = new Random();
+                        var randomNumber = min + rnd.nextInt(max - min);
 
                         return FutureBuilder<
                                 DocumentSnapshot<Map<String, dynamic>>>(
@@ -109,6 +118,7 @@ class _PostsPageState extends State<PostsPage> {
                               if (farmer.hasData) {
                                 // print('JDG ${farmer.data!.data()!['name']}');
                                 farmerName = farmer.data!.data()!['name'];
+                                imagePath = farmer.data!.data()!['image_path'];
                               }
 
                               return Container(
@@ -181,7 +191,8 @@ class _PostsPageState extends State<PostsPage> {
                                                         image:
                                                             const DecorationImage(
                                                           image: NetworkImage(
-                                                              "https://images.generated.photos/PEaj_IOUSRDVR6eNNLeFk1lwDoNodRx2caLBxYkNGIs/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTE0NDE0LmpwZw.jpg"),
+                                                            "https://images.generated.photos/zQ0hBGUJIrKhFLAupgQS2DCvznVa81enAlKA0xN_aEI/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/ODUwMDk3LmpwZw.jpg",
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -205,7 +216,7 @@ class _PostsPageState extends State<PostsPage> {
                                                           height: 5,
                                                         ),
                                                         Text(
-                                                          "17 minutes ago",
+                                                          "${randomNumber} minutes ago",
                                                           style: TextStyle(
                                                             color: Colors
                                                                 .grey[500],
