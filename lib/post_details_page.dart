@@ -44,15 +44,18 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         future: FirebaseFirestore.instance
-            .collection('product')
+            .collection('products')
             .doc(widget.productId)
             .get(),
         builder: (context, product) {
-          print(product.data!.data());
-          // if (product.hasData) {
-          //   print('JDG ${product.data!.data()!['name']}');
-          //   final farmerName = product.data!.data()!['name'];
-          // }
+          // print(product.data!.data());
+          // print(widget.productId);
+          if (product.hasData) {
+            print(product.data!.data());
+            // print('JDG ${product.data!.data()!['name']}');
+            // final farmerName = product.data!.data()!['name'];
+            final productName = product.data!.data()!['name'];
+          }
           return Scaffold(
             body: SafeArea(
               child: SingleChildScrollView(
@@ -149,6 +152,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                         children: [
                           Text(
                             updatedName ?? widget.productModel!.name,
+                            // productName,
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
