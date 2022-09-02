@@ -136,7 +136,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                       child: const Text("Yes"),
                                       onPressed: () async {
                                         widget.onItemDeleted!();
-                                        Navigator.pop(context);
+                                        var nav = Navigator.of(context);
+                                        nav.pop();
+                                        nav.pop();
                                       },
                                     );
                                     Widget noButton = TextButton(
