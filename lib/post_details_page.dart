@@ -128,12 +128,39 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                                     });
                                   },
                                 ),
-                                SizedBox(width: 16),
+                                const SizedBox(width: 16),
                                 InkWell(
-                                  child: Icon(Icons.delete),
+                                  child: const Icon(Icons.delete),
                                   onTap: () {
-                                    widget.onItemDeleted!();
-                                    Navigator.pop(context);
+                                    Widget yesButton = TextButton(
+                                      child: const Text("Yes"),
+                                      onPressed: () async {
+                                        widget.onItemDeleted!();
+                                        Navigator.pop(context);
+                                      },
+                                    );
+                                    Widget noButton = TextButton(
+                                      child: const Text("No"),
+                                      onPressed: () async {
+                                        Navigator.pop(context);
+                                      },
+                                    );
+                                    AlertDialog alert = AlertDialog(
+                                      title: const Text("Delete Post"),
+                                      content: const Text(
+                                          "Are you sure you want to delete this post?"),
+                                      actions: [
+                                        yesButton,
+                                        noButton,
+                                      ],
+                                    );
+
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return alert;
+                                      },
+                                    );
                                   },
                                 ),
                               ],
