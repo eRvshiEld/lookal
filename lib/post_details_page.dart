@@ -56,7 +56,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
             print(product.data!.data());
             // print('JDG ${product.data!.data()!['name']}');
             // final farmerName = product.data!.data()!['name'];
-            final productName = product.data!.data()!['name'];
           }
           return Scaffold(
             body: SafeArea(
@@ -161,7 +160,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                         children: [
                           Text(
                             updatedName ?? widget.productModel!.name,
-                            // productName,
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
