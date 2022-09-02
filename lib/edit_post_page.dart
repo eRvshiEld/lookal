@@ -10,12 +10,14 @@ enum EditMode {
 }
 
 class EditPostPage extends StatefulWidget {
+  final String? id;
   final ProductModel? productModel;
   final EditMode editMode;
   final String? farmerId;
 
   const EditPostPage({
     super.key,
+    this.id,
     this.productModel,
     required this.editMode,
     this.farmerId,
@@ -108,16 +110,27 @@ class _EditPostPageState extends State<EditPostPage> {
                             _quantity.text.isNotEmpty &&
                             _unit.text.isNotEmpty &&
                             _category.text.isNotEmpty) {
-                          await productsCollection.add({
-                            "name": _name.text,
-                            "price": _price.text,
-                            "quantity": _quantity.text,
-                            "unit": _unit.text,
-                            "category": _category.text,
-                            "description": _description.text,
-                            "farmer_id": widget.farmerId,
-                            "image_url": null,
-                          });
+                          if (widget.editMode == EditMode.add) {
+                            await productsCollection.add({
+                              "name": _name.text,
+                              "price": _price.text,
+                              "quantity": _quantity.text,
+                              "unit": _unit.text,
+                              "category": _category.text,
+                              "description": _description.text,
+                              "farmer_id": widget.farmerId,
+                              "image_url": null,
+                            });
+                          } else {
+                            productsCollection.doc(widget.id).update({
+                              'name': _name.text,
+                              'price': _price.text,
+                              'quantity': _quantity.text,
+                              'unit': _unit.text,
+                              'category': _category.text,
+                              'description': _description.text
+                            });
+                          }
 
                           Navigator.pop(context);
                         }

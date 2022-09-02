@@ -51,6 +51,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                         context,
                         MaterialPageRoute(builder: (_) {
                           return EditPostPage(
+                            id: widget.productId,
                             productModel: widget.productModel,
                             editMode: EditMode.edit,
                           );
