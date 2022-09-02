@@ -154,6 +154,13 @@ class _PostsPageState extends State<PostsPage> {
                                           ),
                                           productId:
                                               snapshot.data!.docs[index].id,
+                                          onItemDeleted: () async {
+                                            // Delete
+                                            await productsCollection
+                                                .doc(snapshot
+                                                    .data!.docs[index].id)
+                                                .delete();
+                                          },
                                         );
                                       }),
                                     );
