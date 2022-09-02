@@ -7,12 +7,14 @@ import 'package:lookal/models/product_model.dart';
 import 'package:lookal/widget/header_widget.dart';
 
 class PostDetailsPage extends StatefulWidget {
+  final String user_type;
   final ProductModel? productModel;
   final String productId;
   final VoidCallback? onItemDeleted;
 
   const PostDetailsPage({
     super.key,
+    required this.user_type,
     this.productModel,
     required this.productId,
     this.onItemDeleted,
@@ -78,61 +80,64 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                               Navigator.of(context).pop();
                             },
                           ),
-                          Row(
-                            children: [
-                              InkWell(
-                                child: Icon(
-                                  Icons.edit,
+                          if (widget.user_type != "")
+                            Row(
+                              children: [
+                                InkWell(
+                                  child: Icon(
+                                    Icons.edit,
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (_) {
+                                        return EditPostPage(
+                                          id: widget.productId,
+                                          productModel: updatedName != null &&
+                                                  updateUnit != null &&
+                                                  updatedQuantity != null &&
+                                                  updatedCategory != null &&
+                                                  updatedDescription != null &&
+                                                  updatedPrice != null
+                                              ? ProductModel(
+                                                  name: updatedName!,
+                                                  unit: updateUnit!,
+                                                  quantity: updatedQuantity!,
+                                                  category: updatedCategory!,
+                                                  description:
+                                                      updatedDescription,
+                                                  price: updatedPrice!,
+                                                )
+                                              : widget.productModel,
+                                          editMode: EditMode.edit,
+                                        );
+                                      }),
+                                    ).then((value) {
+                                      if (value is ProductModel) {
+                                        /// `setState` notifies the Flutter
+                                        /// to rebuild the UI
+                                        setState(() {
+                                          /// Updates local value of the item models
+                                          /// to display it on the current page.
+                                          updatedName = value.name;
+                                          updatedDescription =
+                                              value.description;
+                                          updatedPrice = value.price;
+                                        });
+                                      }
+                                    });
+                                  },
                                 ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (_) {
-                                      return EditPostPage(
-                                        id: widget.productId,
-                                        productModel: updatedName != null &&
-                                                updateUnit != null &&
-                                                updatedQuantity != null &&
-                                                updatedCategory != null &&
-                                                updatedDescription != null &&
-                                                updatedPrice != null
-                                            ? ProductModel(
-                                                name: updatedName!,
-                                                unit: updateUnit!,
-                                                quantity: updatedQuantity!,
-                                                category: updatedCategory!,
-                                                description: updatedDescription,
-                                                price: updatedPrice!,
-                                              )
-                                            : widget.productModel,
-                                        editMode: EditMode.edit,
-                                      );
-                                    }),
-                                  ).then((value) {
-                                    if (value is ProductModel) {
-                                      /// `setState` notifies the Flutter
-                                      /// to rebuild the UI
-                                      setState(() {
-                                        /// Updates local value of the item models
-                                        /// to display it on the current page.
-                                        updatedName = value.name;
-                                        updatedDescription = value.description;
-                                        updatedPrice = value.price;
-                                      });
-                                    }
-                                  });
-                                },
-                              ),
-                              SizedBox(width: 16),
-                              InkWell(
-                                child: Icon(Icons.delete),
-                                onTap: () {
-                                  widget.onItemDeleted!();
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          ),
+                                SizedBox(width: 16),
+                                InkWell(
+                                  child: Icon(Icons.delete),
+                                  onTap: () {
+                                    widget.onItemDeleted!();
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            ),
                         ],
                       ),
                     ),

@@ -152,6 +152,7 @@ class _PostsPageState extends State<PostsPage> {
                                             description: data["description"],
                                             imageUrl: data["image_url"],
                                           ),
+                                          user_type: widget.user_type,
                                           productId:
                                               snapshot.data!.docs[index].id,
                                           onItemDeleted: () async {
