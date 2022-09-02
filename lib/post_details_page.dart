@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,6 +23,15 @@ class PostDetailsPage extends StatefulWidget {
 }
 
 class _PostDetailsPageState extends State<PostDetailsPage> {
+  void getData() {
+    final querySnapshot = FirebaseFirestore.instance
+        .collection('products')
+        .where('uid', isEqualTo: widget.productId)
+        .get();
+
+    print(querySnapshot);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +68,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             editMode: EditMode.edit,
                           );
                         }),
-                      );
+                      ).then((value) {
+                        getData();
+                      });
                     },
                   ),
                 ],
